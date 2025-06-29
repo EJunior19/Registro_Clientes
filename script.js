@@ -1,58 +1,45 @@
 function toggleGarante() {
     const tieneGarante = document.getElementById('tiene_garante').value;
     const garanteSection = document.getElementById('garanteSection');
-
-    if (tieneGarante === 'si') {
-        garanteSection.style.display = 'block';
-    } else {
-        garanteSection.style.display = 'none';
-    }
+    garanteSection.style.display = (tieneGarante === 'si') ? 'block' : 'none';
 }
 
 function toggleConyuge() {
     const estadoCivil = document.getElementById('estado_civil').value;
     const conyugeSection = document.getElementById('conyugeSection');
-
-    if (estadoCivil === 'casada') {
-        conyugeSection.style.display = 'block';
-    } else {
-        conyugeSection.style.display = 'none';
-    }
+    conyugeSection.style.display = (estadoCivil === 'casada') ? 'block' : 'none';
 }
 
 function updateBarrios() {
-   const barrioSelect = document.getElementById('barrio');
+ const barrioSelect = document.getElementById('barrio');
     const barrios = [
-      'Jardín del Norte', 'Renacer', 'Nuevo Horizonte', 'San José', 'María Auxiliadora',
-            'Karen Luana', 'Santa Teresa', 'Adela Speratti', 'San Blas', 'Villa Florida',
-            'Stella Marys', 'Donde Nace El Sol', 'Santa Rosa', 'San Miguel', 'Primavera',
-            'Residencial Acuario', 'Rayito de Sol Kilómetro 2', 'San Francisco', 'San Jorge',
-            "Ko'e Rory", "San Juan", "8 de diciembre", "Cafetal guaraní", "15 de agosto",
-            "Las palmeras", "Barrio Morán"
-        ];
-  // Limpiar opciones anteriores
-    barrioSelect.innerHTML = "";
+        'Jardín del Norte', 'Renacer', 'Nuevo Horizonte', 'San José', 'María Auxiliadora',
+        'Karen Luana', 'Santa Teresa', 'Adela Speratti', 'San Blas', 'Villa Florida',
+        'Stella Marys', 'Donde Nace El Sol', 'Santa Rosa', 'San Miguel', 'Primavera',
+        'Residencial Acuario', 'Rayito de Sol Kilómetro 2', 'San Francisco', 'San Jorge',
+        "Ko'e Rory", "San Juan", "8 de diciembre", "Cafetal guaraní", "15 de agosto",
+        "Las palmeras", "Barrio Morán", "Otro"
+    ];
+    // Limpiar opciones anteriores
+    barrioSelect.innerHTML = "<option value=''>Seleccione un barrio</option>";
+
     // Agregar las opciones
-       let option = document.createElement("option");
-        option.value = "";
-        option.text = "Seleccione un barrio";
-        barrioSelect.add(option);
-    for (const barrio of barrios) {
-     option = document.createElement("option");
+  for (const barrio of barrios) {
+     const option = document.createElement("option");
       option.value = barrio;
         option.text = barrio;
         barrioSelect.add(option);
-        selectElement.add(option);
-       
      
 
-    }}
+    }
+};
 
 function formatearNumero(input) {
     let numero = input.value.replace(/\D/g, '');
     numero = numero.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
     input.value = numero;
 }
+
 function formatearTelefono(input) {
     let telefono = input.value.replace(/\D/g, ''); // Eliminar caracteres no numéricos
     telefono = telefono.substring(0, 10); // Limitar a 10 dígitos (ejemplo)
@@ -69,54 +56,41 @@ function formatearTelefono(input) {
 document.addEventListener('DOMContentLoaded', function() {
     toggleGarante();
     toggleConyuge();
- //Acceder a la cámara y tomar la foto
-  
-  const takePhotoButtons = document.querySelectorAll('.takePhoto');
-         
- takePhotoButtons.forEach(button => {
-  const target = button.dataset.target;
-  let video,canvas,photo,fotoBase64Input;
 
-  video = document.getElementById(`video${target}`);
-  canvas = document.getElementById(`canvas${target}`);
-  photo = document.getElementById(`photo${target}`);
-  fotoBase64Input = document.getElementById(`fotoBase64${target}`);
+    function setupCamera(target) {
+   const video = document.getElementById(`video${target}`);
+ const canvas = document.getElementById(`canvas${target}`);
+const photo = document.getElementById(`photo${target}`);
+    const takePhotoBtn = document.getElementById(`takePhoto${target}`);
+        const fotoBase64Input = document.getElementById(`fotoBase64${target}`);
+     navigator.mediaDevices.getUserMedia({ video: { facingMode: { exact: "environment" } } })
 
-    navigator.mediaDevices.getUserMedia({
-        video: {
-        facingMode: {
-          exact: "environment"
-        }
-      
-    }
-  
-})
-    .then (stream => {
-     video.srcObject = stream;
-    })
-    .catch ( e =>
-{ console. log ("Error de la Camara");
-})
+            .then(function(stream) {
+                video.srcObject = stream;
+    photo.srcObject = stream;
+             video.style.display = 'block';
+ console.log('video.srcObject'+video.srcObject);
+            })
+            .catch(function(err) {
+                console.log("Ocurrió un error al acceder a la cámara : " + err);
+            });
 
-takePhotoBtnFrente.addEventListener('click', function() {
-        canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
-        let image_data_url = canvas.toDataURL('image/jpeg');
+        takePhotoBtn.addEventListener('click', function() {
+         canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+         let image_data_url = canvas.toDataURL('image/jpeg');
+            photo.setAttribute('src', image_data_url);
+          
+              fotoBase64Input.setAttribute('value', image_data_url);
 
+      video.style.display = 'none';
+            canvas.style.display = 'none';
+            photo.style.display = 'block';
     });
-  
- });
-   updateBarrios();
-});
 
-document.getElementById('generarPdf').addEventListener('click', function() {
-    // Crear un nuevo documento PDF
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF();
-    let pageHeight = doc.internal.pageSize.getHeight();
-    let margin = 15;
-    let y = margin;
-    // Función para agregar texto con formato
-     function addText(text, options = {}) {
+  
+       
+    }
+  function addText(text, options = {}) {
         const fontSize = options.fontSize || 12;
         const fontWeight = options.fontWeight || 'normal';
         doc.setFontSize(fontSize);
@@ -137,65 +111,97 @@ document.getElementById('generarPdf').addEventListener('click', function() {
             y += lineHeight;
         });
     }
-       function ensureSpace(height) {
-          if (y + height > pageHeight - margin) {
-            doc.addPage();
-            y = margin;
+ // Inicia todos los elementos
+    const listaVideos = ["TitularFrente","TitularDorso","ConyugeFrente","ConyugeDorso","GaranteFrente","GaranteDorso"]
+        listaVideos.forEach(videoAct =>{
+    const videoTitularFrente = document.getElementById(`video${videoAct}`);
+  try{
+           setupCamera(videoAct)
+  
           }
-        }
-    // Obtener el nombre del titular
-    const nombreTitular = document.getElementById('nombre').value || 'registro_cliente';
-    const filename = `${nombreTitular.replace(/\s+/g, '_').replace(/[^a-zA-Z0-9_]/g, '')}_${Date.now()}.pdf`;
- // Obtener la imagen en Base64 del titular
-    const fotoBase64TitularFrente = document.getElementById('fotoBase64TitularFrente').value;
-    const fotoBase64TitularDorso = document.getElementById('fotoBase64TitularDorso').value;
- // OBTENER GARANTE
-     const fotoBase64GaranteFrente = document.getElementById('fotoBase64GaranteFrente').value;
-    const fotoBase64GaranteDorso = document.getElementById('fotoBase64GaranteDorso').value;
+      catch(error){
+              console.log("Error"+error)
 
-// Obtener la imagen en Base64 del conyuge
+          }
+        })
+
+    // Acceder a la cámara al cargar la página
+       
+     updateBarrios();
+  
+});
+
+document.getElementById('generarPdf').addEventListener('click', function() {
+    // Crear un nuevo documento PDF
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    let pageHeight = doc.internal.pageSize.getHeight();
+    let margin = 15;
+    let y = margin;
+
+const nombreTitular = document.getElementById('nombre').value || 'registro_cliente';
+    const filename = `${nombreTitular.replace(/\s+/g, '_').replace(/[^a-zA-Z0-9_]/g, '')}_${Date.now()}.pdf`;
+
+const fotoBase64TitularFrente = document.getElementById('fotoBase64TitularFrente').value;
+    const fotoBase64TitularDorso = document.getElementById('fotoBase64TitularDorso').value;
+    const nombre = document.getElementById('nombre').value;
+const cedula = document.getElementById('cedula').value;
+ const telefono = document.getElementById('telefono').value;
+  const ciudad = document.getElementById('ciudad').value;
+const barrio = document.getElementById('barrio').value;
+ const estadoCivil = document.getElementById('estado_civil').value;
+    const vivePareja = document.getElementById('vive_pareja').value;
+     let nombreConyuge="" ,lugarTrabajoConyuge="" ,ingresoConyuge=""
+          if (document.getElementById('estado_civil').value === 'casada') {
+       nombreConyuge = document.getElementById('nombre_conyuge').value;
+    lugarTrabajoConyuge = document.getElementById('lugar_trabajo_conyuge').value;
+         ingresoConyuge = document.getElementById('ingreso_conyuge').value;
+
+        }
 
  const fotoBase64ConyugeFrente = document.getElementById('fotoBase64ConyugeFrente').value;
-    const fotoBase64ConyugeDorso = document.getElementById('fotoBase64ConyugeDorso').value;
-  ensureSpace(30);
+  const fotoBase64ConyugeDorso = document.getElementById('fotoBase64ConyugeDorso').value;
+  let fotoBase64GaranteFrente = "",fotoBase64GaranteDorso= "";
+      try{
+          
+ if (document.getElementById('tiene_garante').value === 'si') {
+     const nombreGarante = document.getElementById('nombre_garante').value;
+         const cedulaGarante = document.getElementById('cedula_garante').value;
+       const telefonoGarante = document.getElementById('telefono_garante').value;
+    const direccionGarante = document.getElementById('direccion_garante').value;
+   const lugarTrabajoGarante = document.getElementById('lugar_trabajo_garante').value;
+      const ingresoMensualGarante = document.getElementById('ingreso_mensual_garante').value;
+           fotoBase64GaranteFrente = document.getElementById('fotoBase64GaranteFrente').value;
+         fotoBase64GaranteDorso = document.getElementById('fotoBase64GaranteDorso').value;
+         }}
+       catch(error){
+              fotoBase64GaranteFrente ="No Disponible";
+               fotoBase64GaranteDorso = "No Disponible";
   
-    //Defino una variable para el estado del 
+            }
+ // defino
+    const lugarTrabajoTitular = document.getElementById('lugar_trabajo_titular').value;
+   const tiempoTrabajo = document.getElementById('tiempo_trabajo').value;
+   const ingresoMensualTitular = document.getElementById('ingreso_mensual_titular').value;
+     const contactoLaboral = document.getElementById('contacto_laboral').value;
 
-    
-    const nombre = document.getElementById('nombre').value;
-    const cedula = document.getElementById('cedula').value;
-        const telefono = document.getElementById('telefono').value;
-        const ciudad = document.getElementById('ciudad').value;
-        const barrio = document.getElementById('barrio').value;
-        const estadoCivil = document.getElementById('estado_civil').value;
-        const vivePareja = document.getElementById('vive_pareja').value;
-  const nombreConyuge = document.getElementById('nombre_conyuge').value;
-        const lugarTrabajoConyuge = document.getElementById('lugar_trabajo_conyuge').value;
-        const ingresoConyuge = document.getElementById('ingreso_conyuge').value;
-        const lugarTrabajoTitular = document.getElementById('lugar_trabajo_titular').value;
-        const tiempoTrabajo = document.getElementById('tiempo_trabajo').value;
-        const ingresoMensualTitular = document.getElementById('ingreso_mensual_titular').value;
-        const contactoLaboral = document.getElementById('contacto_laboral').value;
- const nombreProducto = document.getElementById('nombre_producto').value;
-        const codigoProducto = document.getElementById('codigo_producto').value;
-        const cuotas = document.getElementById('cuotas').value;
-        const montoCuota = document.getElementById('monto_cuota').value;
-        const entregaInicial = document.getElementById('entrega_inicial').value;
- const nombreRef1 = document.getElementById('nombre_ref1').value;
-        const relacionRef1 = document.getElementById('relacion_ref1').value;
-        const telefonoRef1 = document.getElementById('telefono_ref1').value;
+  const nombreProducto = document.getElementById('nombre_producto').value;
+  const codigoProducto = document.getElementById('codigo_producto').value;
+const cuotas = document.getElementById('cuotas').value;
+   const montoCuota = document.getElementById('monto_cuota').value;
+     const entregaInicial = document.getElementById('entrega_inicial').value;
+const nombreRef1 = document.getElementById('nombre_ref1').value;
+     const relacionRef1 = document.getElementById('relacion_ref1').value;
+       const telefonoRef1 = document.getElementById('telefono_ref1').value;
  const nombreRef2 = document.getElementById('nombre_ref2').value;
-        const relacionRef2 = document.getElementById('relacion_ref2').value;
-        const telefonoRef2 = document.getElementById('telefono_ref2').value;
+const relacionRef2 = document.getElementById('relacion_ref2').value;
+const telefonoRef2 = document.getElementById('telefono_ref2').value;
 
-        const nombreRef3 = document.getElementById('nombre_ref3').value;
-        const relacionRef3 = document.getElementById('relacion_ref3').value;
-        const telefonoRef3 = document.getElementById('telefono_ref3').value;
-        
-        const quienUsa = document.getElementById('quien_usa').value;
-        const tieneGarante = document.getElementById('tiene_garante').value;
-        const observaciones = document.getElementById('observaciones').value;
- 
+     const nombreRef3 = document.getElementById('nombre_ref3').value;
+       const relacionRef3 = document.getElementById('relacion_ref3').value;
+      const telefonoRef3 = document.getElementById('telefono_ref3').value;
+    const quienUsa = document.getElementById('quien_usa').value;
+  const observaciones = document.getElementById('observaciones').value;
 
     // Título del PDF
     addText('Registro de Visita a Cliente', { fontSize: 18, fontWeight: 'bold' });
@@ -210,17 +216,17 @@ document.getElementById('generarPdf').addEventListener('click', function() {
     addText(`Estado Civil: ${estadoCivil}`);
     addText(`¿Vive con su pareja?: ${vivePareja === 'si' ? 'Sí' : 'No'}`);
         if (fotoBase64TitularFrente) {
-        doc.addImage(fotoBase64TitularFrente, 'JPEG', margin, y, 80, 60); // Ajusta la posición y el tamaño según sea necesario
-        y += 70;
+           doc.addImage(fotoBase64TitularFrente, 'JPEG', margin, y, 80, 60);
+        
     }
-      ensureSpace(100)
+      ensureSpace(70)
      if (fotoBase64TitularDorso) {
-        doc.addImage(fotoBase64TitularDorso, 'JPEG', margin, y, 80, 60); // Ajusta la posición y el tamaño según sea necesario
-        y += 70;
-    }
-
+        doc.addImage(fotoBase64TitularDorso, 'JPEG', margin, y, 80, 60);
+     }
+        ensureSpace(70)
     y += 5;
-    
+ 
+  
     // Datos del cónyuge (si aplica)
     if (document.getElementById('estado_civil').value === 'casada') {
         addText('Datos del Cónyuge:', { fontSize: 14, fontWeight: 'bold' });
@@ -228,31 +234,52 @@ document.getElementById('generarPdf').addEventListener('click', function() {
         addText(`Lugar de Trabajo: ${lugarTrabajoConyuge}`);
         addText(`Ingreso Mensual: ${ingresoConyuge}`);
          // Agregar la imagen al PDF (CONYUGE)
-        if (fotoBase64ConyugeFrente) {
-        doc.addImage(fotoBase64ConyugeFrente, 'JPEG', margin, y, 80, 60); // Ajusta la posición y el tamaño según sea necesario
-        y += 70;
-    }
+ if (fotoBase64ConyugeFrente) {
+            doc.addImage(fotoBase64ConyugeFrente, 'JPEG', margin, y, 80, 60);
+   
+        }
         ensureSpace(100)
-    if (fotoBase64ConyugeDorso) {
-        doc.addImage(fotoBase64ConyugeDorso, 'JPEG', margin, y, 80, 60); // Ajusta la posición y el tamaño según sea necesario
-        y += 70;
+     if (fotoBase64ConyugeDorso) {
+         
+doc.addImage(fotoBase64ConyugeDorso, 'JPEG', margin, y, 80, 60);
+        }
+        y += 5;
+              
+           ensureSpace(100)
     }
-ensureSpace(50)
+      if (document.getElementById('tiene_garante').value === 'si') {
+   addText('Datos del Garante:', { fontSize: 14, fontWeight: 'bold' });
+        addText(`Nombre Completo: ${nombreGarante}`);
+   addText(`Cedula: ${cedulaGarante}`);
+         addText(`Teléfono: ${telefonoGarante}`);
+            addText(`Dirección: ${direccionGarante}`);
+  addText(`Lugar de Trabajo: ${lugarTrabajoGarante}`);
+     addText(`Ingreso Mensual: ${ingresoMensualGarante}`);
+
+            
+
+     // Agregar la imagen al PDF (GARANTE)
+       ensureSpace(70);
+     if (fotoBase64GaranteFrente) {
+       
+       doc.addImage(fotoBase64GaranteFrente, 'JPEG', margin, y, 80, 60);
+            
+        }
+        
+            ensureSpace(100)
+     if (fotoBase64GaranteDorso) {
+  doc.addImage(fotoBase64GaranteDorso, 'JPEG', margin, y, 80, 60);
+     
+         
+    }
+
         y += 5;
      
-    }
- // Agregar la imagen al PDF (GARANTE)
-      if (fotoBase64GaranteFrente) {
-        doc.addImage(fotoBase64GaranteFrente, 'JPEG', margin, y, 80, 60); // Ajusta la posición y el tamaño según sea necesario
-        y += 70;
-    }
-       ensureSpace(100)
-     if (fotoBase64GaranteDorso) {
-        doc.addImage(fotoBase64GaranteDorso, 'JPEG', margin, y, 80, 60); // Ajusta la posición y el tamaño según sea necesario
-        y += 70;
-    }
-       ensureSpace(50)
-    // Información Laboral del Titular
+}
+        ensureSpace(100)
+
+ // Información Laboral del Titular
+  ensureSpace(50)
     addText('Información Laboral del Titular:', { fontSize: 14, fontWeight: 'bold' });
     addText(`Lugar de Trabajo: ${lugarTrabajoTitular}`);
     addText(`Tiempo en el Trabajo: ${tiempoTrabajo}`);
@@ -279,10 +306,10 @@ ensureSpace(50)
     // Otros
     addText('Otros:', { fontSize: 14, fontWeight: 'bold' });
     addText(`¿Quién usará el producto?: ${quienUsa}`);
-    addText(`¿Tiene garante?: ${tieneGarante === 'si' ? 'Sí' : 'No'}`);
- 
-        ensureSpace(50)
- // Guardar el PDF
+    addText(`Observaciones Generales: ${observaciones}`);
+    y += 5;
+   ensureSpace(100)
+    // Guardar el PDF
     doc.save(filename);
 });
- 
+   

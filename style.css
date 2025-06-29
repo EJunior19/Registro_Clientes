@@ -1,5 +1,5 @@
 body {
-    font-family: sans-serif;
+    font-family: 'Arial', sans-serif;
     background-color: #12263A; /* Azul oscuro (fondo) */
     color: #FFFFFF; /* Blanco (texto) */
     margin: 0;
@@ -12,42 +12,51 @@ body {
 
 .container {
     background-color: #1E3A57; /* Gris oscuro (contenedor) */
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    padding: 20px;
-    width: 80%;
-    max-width: 800px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    width: 85%;
+    max-width: 900px;
 }
 
 h1 {
     text-align: center;
     color: #23B47E; /* Verde (título) */
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 section {
-    margin-bottom: 20px;
-    padding: 15px;
+    margin-bottom: 30px;
+    padding: 20px;
     border: 1px solid #23B47E; /* Verde (borde) */
-    border-radius: 5px;
+    border-radius: 8px;
+    transition: all 0.3s ease; /* Transición suave */
+}
+
+section:hover {
+    box-shadow: 0 4px 10px rgba(35, 180, 126, 0.5); /* Sutil sombra al pasar el mouse */
 }
 
 section h2 {
     color: #23B47E; /* Verde (subtítulo) */
     margin-top: 0;
-    margin-bottom: 10px;
-    border-bottom: 2px solid #23B47E; /* Verde (borde inferior) */
-    padding-bottom: 5px;
+    margin-bottom: 15px;
+    border-bottom: 3px solid #23B47E; /* Verde (borde inferior) */
+    padding-bottom: 8px;
+    text-transform: uppercase; /* Mayúsculas */
 }
 
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 label {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
     color: #FFFFFF; /* Blanco (etiqueta) */
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 input[type="text"],
@@ -56,13 +65,23 @@ input[type="number"],
 select,
 textarea {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     border: 1px solid #23B47E; /* Verde (borde) */
-    border-radius: 4px;
+    border-radius: 6px;
     box-sizing: border-box;
     font-size: 16px;
     background-color: #1E3A57; /* Gris oscuro (fondo) */
     color: #FFFFFF; /* Blanco (texto) */
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="tel"]:focus,
+input[type="number"]:focus,
+select:focus,
+textarea:focus {
+    border-color: #23B47E; /* Verde (borde al enfocar) */
+    outline: none; /* Elimina el borde predeterminado al enfocar */
 }
 
 select {
@@ -79,30 +98,32 @@ textarea {
 
 .button-container {
     display: flex;
-    justify-content: center; /* Centrar el botón */
-    margin-top: 20px;
+    justify-content: center;
+    margin-top: 30px;
 }
 
 button {
     background-color: #23B47E; /* Verde (botón) */
     color: white;
-    padding: 12px 20px;
+    padding: 14px 25px;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 18px;
     display: inline-block;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Transición suave */
 }
 
 button:hover {
     background-color: #197554; /* Verde más oscuro (hover) */
+    transform: scale(1.05); /* Sutil efecto de aumento al pasar el mouse */
 }
 
 /* Estilos para dispositivos móviles */
 @media (max-width: 600px) {
     .container {
         width: 95%;
-        padding: 10px;
+        padding: 15px;
     }
 
     input[type="text"],
@@ -110,11 +131,11 @@ button:hover {
     input[type="number"],
     select,
     textarea {
-        font-size: 14px;
+        font-size: 15px;
     }
 
     button {
-        font-size: 14px;
+        font-size: 16px;
     }
 
     .button-container {
@@ -131,14 +152,20 @@ button:hover {
 /* Estilos específicos para las referencias */
 .referencia {
     margin-bottom: 15px;
-    padding: 10px;
+    padding: 12px;
     border: 1px solid #23B47E; /* Verde (borde) */
-    border-radius: 4px;
+    border-radius: 6px;
 }
 
 .referencia h3 {
     margin-top: 0;
-    margin-bottom: 5px;
-    font-size: 1.2em;
-    color: #FFFFFF; /* Blanco (texto) */
+    margin-bottom: 8px;
+    font-size: 1.3em;
+    color: #23B47E; /* Verde (título de la referencia) */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+#asesorSection{
+text-align: center;
+ color: #FFFFFF;
+font-size:1.2rem
 }
