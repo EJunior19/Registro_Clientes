@@ -11,7 +11,6 @@
     <div class="container">
         <h1>Registro de Visita a Cliente</h1>
 
-        
         <section class="cliente">
             <h2>Datos del Cliente</h2>
             <div class="form-group">
@@ -68,6 +67,22 @@
                     <option value="no">No</option>
                 </select>
             </div>
+            <div class="form-group">
+                <label for="foto_cedula_frente">Foto Cédula (Frente):</label>
+                <button type="button" id="takePhotoTitularFrente">Tomar Foto</button>
+                <video id="videoTitularFrente" width="320" height="240" autoplay style="display:none;"></video>
+                <canvas id="canvasTitularFrente" width="320" height="240" style="display:none;"></canvas>
+                <img id="photoTitularFrente" alt="Foto Cédula (Frente)" style="max-width: 100%; height: auto;">
+                <input type="hidden" id="fotoBase64TitularFrente" name="fotoBase64TitularFrente">
+            </div>
+            <div class="form-group">
+                <label for="foto_cedula_dorso">Foto Cédula (Dorso):</label>
+                <button type="button" id="takePhotoTitularDorso">Tomar Foto</button>
+                <video id="videoTitularDorso" width="320" height="240" autoplay style="display:none;"></video>
+                <canvas id="canvasTitularDorso" width="320" height="240" style="display:none;"></canvas>
+                <img id="photoTitularDorso" alt="Foto Cédula (Dorso)" style="max-width: 100%; height: auto;">
+                <input type="hidden" id="fotoBase64TitularDorso" name="fotoBase64TitularDorso">
+            </div>
         </section>
 
         <section id="conyugeSection" class="conyuge" style="display: none;">
@@ -76,6 +91,22 @@
                 <label for="nombre_conyuge">Nombre Completo:</label>
                 <input type="text" id="nombre_conyuge" name="nombre_conyuge">
             </div>
+             <div class="form-group">
+            <label for="foto_cedula_frente_conyuge">Foto Cédula (Frente):</label>
+            <button type="button" id="takePhotoConyugeFrente">Tomar Foto</button>
+            <video id="videoConyugeFrente" width="320" height="240" autoplay style="display:none;"></video>
+            <canvas id="canvasConyugeFrente" width="320" height="240" style="display:none;"></canvas>
+            <img id="photoConyugeFrente" alt="Foto Cédula (Frente)" style="max-width: 100%; height: auto;">
+            <input type="hidden" id="fotoBase64ConyugeFrente" name="fotoBase64ConyugeFrente">
+        </div>
+         <div class="form-group">
+            <label for="foto_cedula_dorso_conyuge">Foto Cédula (Dorso):</label>
+            <button type="button" id="takePhotoConyugeDorso">Tomar Foto</button>
+            <video id="videoConyugeDorso" width="320" height="240" autoplay style="display:none;"></video>
+            <canvas id="canvasConyugeDorso" width="320" height="240" style="display:none;"></canvas>
+            <img id="photoConyugeDorso" alt="Foto Cédula (Dorso)" style="max-width: 100%; height: auto;">
+            <input type="hidden" id="fotoBase64ConyugeDorso" name="fotoBase64ConyugeDorso">
+        </div>
             <div class="form-group">
                 <label for="lugar_trabajo_conyuge">Lugar de Trabajo:</label>
                 <input type="text" id="lugar_trabajo_conyuge" name="lugar_trabajo_conyuge">
@@ -203,6 +234,22 @@
                   <label for="nombre_garante">Nombre Completo:</label>
                   <input type="text" id="nombre_garante" name="nombre_garante">
               </div>
+         <div class="form-group">
+            <label for="foto_cedula_frente_garante">Foto Cédula (Frente):</label>
+            <button type="button" id="takePhotoGaranteFrente">Tomar Foto</button>
+            <video id="videoGaranteFrente" width="320" height="240" autoplay style="display:none;"></video>
+            <canvas id="canvasGaranteFrente" width="320" height="240" style="display:none;"></canvas>
+            <img id="photoGaranteFrente" alt="Foto Cédula (Frente)" style="max-width: 100%; height: auto;">
+            <input type="hidden" id="fotoBase64GaranteFrente" name="fotoBase64GaranteFrente">
+        </div>
+         <div class="form-group">
+            <label for="foto_cedula_dorso_garante">Foto Cédula (Dorso):</label>
+            <button type="button" id="takePhotoGaranteDorso">Tomar Foto</button>
+            <video id="videoGaranteDorso" width="320" height="240" autoplay style="display:none;"></video>
+            <canvas id="canvasGaranteDorso" width="320" height="240" style="display:none;"></canvas>
+            <img id="photoGaranteDorso" alt="Foto Cédula (Dorso)" style="max-width: 100%; height: auto;">
+            <input type="hidden" id="fotoBase64GaranteDorso" name="fotoBase64GaranteDorso">
+        </div>
               <div class="form-group">
                   <label for="cedula_garante">Cédula:</label>
                   <input type="text" id="cedula_garante" name="cedula_garante">
@@ -232,15 +279,14 @@
 
             <div class="button-container">
                 <button type="button" id="generarPdf">Guardar como PDF</button>
-                 
+               
             </div>
-         
-
+  
     </div>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
 
+    
     
