@@ -1,0 +1,144 @@
+body {
+    font-family: sans-serif;
+    background-color: #12263A; /* Azul oscuro (fondo) */
+    color: #FFFFFF; /* Blanco (texto) */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    background-color: #1E3A57; /* Gris oscuro (contenedor) */
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    width: 80%;
+    max-width: 800px;
+}
+
+h1 {
+    text-align: center;
+    color: #23B47E; /* Verde (título) */
+    margin-bottom: 20px;
+}
+
+section {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #23B47E; /* Verde (borde) */
+    border-radius: 5px;
+}
+
+section h2 {
+    color: #23B47E; /* Verde (subtítulo) */
+    margin-top: 0;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #23B47E; /* Verde (borde inferior) */
+    padding-bottom: 5px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #FFFFFF; /* Blanco (etiqueta) */
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="number"],
+select,
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #23B47E; /* Verde (borde) */
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+    background-color: #1E3A57; /* Gris oscuro (fondo) */
+    color: #FFFFFF; /* Blanco (texto) */
+}
+
+select {
+    appearance: none; /* Elimina la apariencia predeterminada del select */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E"); /* Icono de flecha */
+    background-repeat: no-repeat;
+    background-position: right 10px top 50%;
+    background-size: 16px;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center; /* Centrar el botón */
+    margin-top: 20px;
+}
+
+button {
+    background-color: #23B47E; /* Verde (botón) */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    display: inline-block;
+}
+
+button:hover {
+    background-color: #197554; /* Verde más oscuro (hover) */
+}
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 600px) {
+    .container {
+        width: 95%;
+        padding: 10px;
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    input[type="number"],
+    select,
+    textarea {
+        font-size: 14px;
+    }
+
+    button {
+        font-size: 14px;
+    }
+
+    .button-container {
+        flex-direction: column; /* Apila los botones en pantallas pequeñas */
+        align-items: center; /* Centra los botones */
+    }
+
+    .button-container button {
+        margin: 10px 0; /* Espacio entre los botones apilados */
+        width: 100%; /* Ocupan todo el ancho */
+    }
+}
+
+/* Estilos específicos para las referencias */
+.referencia {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #23B47E; /* Verde (borde) */
+    border-radius: 4px;
+}
+
+.referencia h3 {
+    margin-top: 0;
+    margin-bottom: 5px;
+    font-size: 1.2em;
+    color: #FFFFFF; /* Blanco (texto) */
+}
