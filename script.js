@@ -57,19 +57,21 @@ function formatearNumero(input) {
     numero = numero.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
     input.value = numero;
 }
-
 document.addEventListener('DOMContentLoaded', function() {
     toggleGarante();
     toggleConyuge();
+
     // Acceder a la cámara al cargar la página y configurar los event listeners para las fotos
     function setupCamera(videoElement, canvasElement, photoElement, takePhotoBtnElement, fotoBase64InputElement) {
-        navigator.mediaDevices.getUserMedia({ video: true })
-            .then(function(stream) {
-                videoElement.srcObject = stream;
-            })
-            .catch(function(err) {
-                console.log("Ocurrió un error: " + err);
-            });
+        navigator.mediaDevices.getUserMedia({
+    video: { facingMode: { exact: "environment" } }
+  })
+        .then(function(stream) {
+            videoElement.srcObject = stream;
+        })
+        .catch(function(err) {
+            console.log("Ocurrió un error: " + err);
+        });
 
         takePhotoBtnElement.addEventListener('click', function() {
             canvasElement.getContext('2d').drawImage(videoElement, 0, 0, canvasElement.width, canvasElement.height);
@@ -119,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const photoConyugeDorso = document.getElementById('photoConyugeDorso');
     const takePhotoBtnConyugeDorso = document.getElementById('takePhotoConyugeDorso');
     const fotoBase64ConyugeDorsoInput = document.getElementById('fotoBase64ConyugeDorso');
-  try {
+        try {
         setupCamera(videoConyugeDorso, canvasConyugeDorso, photoConyugeDorso, takePhotoBtnConyugeDorso, fotoBase64ConyugeDorsoInput);
     }
      catch(error){
@@ -150,12 +152,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Inicializar lista de barrios al cargar la página
     updateBarrios();
-
-    // Asegurarse de que los barrios se actualicen al cambiar la ciudad
-    document.getElementById('ciudad').addEventListener('change', updateBarrios);
-});
-
-document.getElementById('generarPdf').addEventListener('click', function() {
+     document.getElementById('generarPdf').addEventListener('click', function() {
     // Crear un nuevo documento PDF
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
@@ -167,14 +164,15 @@ document.getElementById('generarPdf').addEventListener('click', function() {
     // Obtener la imagen en Base64 del titular
     const fotoBase64TitularFrente = document.getElementById('fotoBase64TitularFrente').value;
     const fotoBase64TitularDorso = document.getElementById('fotoBase64TitularDorso').value;
-
     // Obtener la imagen en Base64 del conyuge
     const fotoBase64ConyugeFrente = document.getElementById('fotoBase64ConyugeFrente').value;
     const fotoBase64ConyugeDorso = document.getElementById('fotoBase64ConyugeDorso').value;
 
-    // Obtener la imagen en Base64 del GARANTE
-    const fotoBase64GaranteFrente = document.getElementById('fotoBase64GaranteFrente').value;
+      // Obtener la imagen en Base64 del GARANTE
+       const fotoBase64GaranteFrente = document.getElementById('fotoBase64GaranteFrente').value;
     const fotoBase64GaranteDorso = document.getElementById('fotoBase64GaranteDorso').value;
+       
+
 
     // Definir márgenes
     const margin = 15;
@@ -202,8 +200,7 @@ document.getElementById('generarPdf').addEventListener('click', function() {
     addText(`Ciudad: ${document.getElementById('ciudad').value}, Barrio: ${document.getElementById('barrio').value}`);
     addText(`Estado Civil: ${document.getElementById('estado_civil').value}`);
     addText(`¿Vive con su pareja?: ${document.getElementById('vive_pareja').value}`);
-
-    // Agregar la imagen al PDF (TITULAR)
+      // Agregar la imagen al PDF (TITULAR)
     if (fotoBase64TitularFrente) {
         doc.addImage(fotoBase64TitularFrente, 'JPEG', margin, y, 80, 60); // Ajusta la posición y el tamaño según sea necesario
         y += 70;
@@ -212,8 +209,7 @@ document.getElementById('generarPdf').addEventListener('click', function() {
         doc.addImage(fotoBase64TitularDorso, 'JPEG', margin, y, 80, 60); // Ajusta la posición y el tamaño según sea necesario
         y += 70;
     }
-
-    y += 5;
+       y += 5;
 
     // Datos del cónyuge (si aplica)
     if (document.getElementById('estado_civil').value === 'casada') {
@@ -222,7 +218,7 @@ document.getElementById('generarPdf').addEventListener('click', function() {
         addText(`Lugar de Trabajo: ${document.getElementById('lugar_trabajo_conyuge').value}`);
         addText(`Ingreso Mensual: ${document.getElementById('ingreso_conyuge').value}`);
  // Agregar la imagen al PDF (CONYUGE)
-     if (fotoBase64ConyugeFrente) {
+       if (fotoBase64ConyugeFrente) {
         doc.addImage(fotoBase64ConyugeFrente, 'JPEG', margin, y, 80, 60); // Ajusta la posición y el tamaño según sea necesario
         y += 70;
     }
@@ -230,8 +226,7 @@ document.getElementById('generarPdf').addEventListener('click', function() {
         doc.addImage(fotoBase64ConyugeDorso, 'JPEG', margin, y, 80, 60); // Ajusta la posición y el tamaño según sea necesario
         y += 70;
     }
-
-        y += 5;
+       y += 5;
     }
 
     // Información Laboral del Titular
@@ -262,20 +257,19 @@ document.getElementById('generarPdf').addEventListener('click', function() {
     addText('Otros:', { fontSize: 14, fontWeight: 'bold' });
     addText(`¿Quién usará el producto?: ${document.getElementById('quien_usa').value}`);
     addText(`¿Tiene garante?: ${document.getElementById('tiene_garante').value}`);
-
-      // Agregar la imagen al PDF (GARANTE)
-    if (fotoBase64GaranteFrente) {
+     // Agregar la imagen al PDF (GARANTE)
+       if (fotoBase64GaranteFrente) {
         doc.addImage(fotoBase64GaranteFrente, 'JPEG', margin, y, 80, 60); // Ajusta la posición y el tamaño según sea necesario
         y += 70;
     }
-      if (fotoBase64GaranteDorso) {
+     if (fotoBase64GaranteDorso) {
         doc.addImage(fotoBase64GaranteDorso, 'JPEG', margin, y, 80, 60); // Ajusta la posición y el tamaño según sea necesario
         y += 70;
     }
-
     y += 5;
     addText(`Observaciones Generales: ${document.getElementById('observaciones').value}`);
-   
-     // Guardar el PDF
+    
+    // Guardar el PDF
     doc.save(filename);
 });
+ });
