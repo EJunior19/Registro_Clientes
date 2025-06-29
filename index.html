@@ -31,7 +31,37 @@
             </div>
             <div class="form-group">
                 <label for="barrio">Barrio:</label>
-                <select id="barrio" name="barrio"></select>
+                <select id="barrio" name="barrio">
+                    <option value="">Seleccione un barrio</option>
+                    <option value="Jardín del Norte">Jardín del Norte</option>
+                    <option value="Renacer">Renacer</option>
+                    <option value="Nuevo Horizonte">Nuevo Horizonte</option>
+                    <option value="San José">San José</option>
+                    <option value="María Auxiliadora">María Auxiliadora</option>
+                    <option value="Karen Luana">Karen Luana</option>
+                    <option value="Santa Teresa">Santa Teresa</option>
+                    <option value="Adela Speratti">Adela Speratti</option>
+                    <option value="San Blas">San Blas</option>
+                    <option value="Villa Florida">Villa Florida</option>
+                    <option value="Stella Marys">Stella Marys</option>
+                    <option value="Donde Nace El Sol">Donde Nace El Sol</option>
+                    <option value="Santa Rosa">Santa Rosa</option>
+                    <option value="San Miguel">San Miguel</option>
+                    <option value="Primavera">Primavera</option>
+                    <option value="Residencial Acuario">Residencial Acuario</option>
+                    <option value="Rayito de Sol Kilómetro 2">Rayito de Sol Kilómetro 2</option>
+                    <option value="San Francisco">San Francisco</option>
+                    <option value="San Jorge">San Jorge</option>
+                    <option value="Ko'e Rory">Ko'e Rory</option>
+                    <option value="San Juan">San Juan</option>
+                    <option value="8 de diciembre">8 de diciembre</option>
+                    <option value="Cafetal guaraní">Cafetal guaraní</option>
+                    <option value="15 de agosto">15 de agosto</option>
+                    <option value="Las palmeras">Las palmeras</option>
+                    <option value="Barrio Morán">Barrio Morán</option>
+                    <option value="otro">Otro</option>
+                </select>
+                <input type="text" id="otroBarrio" name="otroBarrio" style="display:none;" placeholder="Ingrese el nombre del barrio">
             </div>
             <div class="form-group">
                 <label for="estado_civil">Estado Civil:</label>
@@ -54,15 +84,14 @@
                 <canvas id="canvasTitularFrente" width="320" height="240" style="display:none;"></canvas>
                 <img id="photoTitularFrente" alt="Foto Cédula (Frente)" style="max-width: 100%; height: auto;">
                 <input type="hidden" id="fotoBase64TitularFrente" name="fotoBase64TitularFrente">
-            </div>
-            <div class="form-group">
+                  <div class="form-group">
                 <label for="foto_cedula_dorso">Foto Cédula (Dorso):</label>
                 <button type="button" class="takePhoto" data-target="TitularDorso">Tomar Foto</button>
                 <video id="videoTitularDorso" width="320" height="240" autoplay style="display:none;"></video>
                 <canvas id="canvasTitularDorso" width="320" height="240" style="display:none;"></canvas>
                 <img id="photoTitularDorso" alt="Foto Cédula (Dorso)" style="max-width: 100%; height: auto;">
                 <input type="hidden" id="fotoBase64TitularDorso" name="fotoBase64TitularDorso">
-            </div>
+                </div>
         </section>
 
         <section id="conyugeSection" class="conyuge" style="display: none;">
@@ -71,14 +100,6 @@
                 <label for="nombre_conyuge">Nombre Completo:</label>
                 <input type="text" id="nombre_conyuge" name="nombre_conyuge">
             </div>
-            <div class="form-group">
-                <label for="lugar_trabajo_conyuge">Lugar de Trabajo:</label>
-                <input type="text" id="lugar_trabajo_conyuge" name="lugar_trabajo_conyuge">
-            </div>
-            <div class="form-group">
-                <label for="ingreso_conyuge">Ingreso Mensual:</label>
-                <input type="text" id="ingreso_conyuge" name="ingreso_conyuge" oninput="formatearNumero(this)">
-            </div>
              <div class="form-group">
             <label for="foto_cedula_frente_conyuge">Foto Cédula (Frente):</label>
             <button type="button" class="takePhoto" data-target="ConyugeFrente">Tomar Foto</button>
@@ -86,8 +107,7 @@
             <canvas id="canvasConyugeFrente" width="320" height="240" style="display:none;"></canvas>
             <img id="photoConyugeFrente" alt="Foto Cédula (Frente)" style="max-width: 100%; height: auto;">
             <input type="hidden" id="fotoBase64ConyugeFrente" name="fotoBase64ConyugeFrente">
-            </div>
-            <div class="form-group">
+         <div class="form-group">
             <label for="foto_cedula_dorso_conyuge">Foto Cédula (Dorso):</label>
             <button type="button" class="takePhoto" data-target="ConyugeDorso">Tomar Foto</button>
             <video id="videoConyugeDorso" width="320" height="240" autoplay style="display:none;"></video>
@@ -95,6 +115,14 @@
             <img id="photoConyugeDorso" alt="Foto Cédula (Dorso)" style="max-width: 100%; height: auto;">
             <input type="hidden" id="fotoBase64ConyugeDorso" name="fotoBase64ConyugeDorso">
         </div>
+            <div class="form-group">
+                <label for="lugar_trabajo_conyuge">Lugar de Trabajo:</label>
+                <input type="text" id="lugar_trabajo_conyuge" name="lugar_trabajo_conyuge">
+            </div>
+            <div class="form-group">
+                <label for="ingreso_conyuge">Ingreso Mensual:</label>
+                <input type="text" id="ingreso_conyuge" name="ingreso_conyuge" onkeyup="formatearNumero(this)">
+            </div>
         </section>
 
         <section class="laboral">
@@ -109,7 +137,7 @@
             </div>
             <div class="form-group">
                 <label for="ingreso_mensual_titular">Ingreso Mensual:</label>
-                <input type="text" id="ingreso_mensual_titular" name="ingreso_mensual_titular" oninput="formatearNumero(this)">
+                <input type="text" id="ingreso_mensual_titular" name="ingreso_mensual_titular" onkeyup="formatearNumero(this)">
             </div>
             <div class="form-group">
                 <label for="contacto_laboral">Contacto Laboral:</label>
@@ -214,7 +242,7 @@
                   <label for="nombre_garante">Nombre Completo:</label>
                   <input type="text" id="nombre_garante" name="nombre_garante">
               </div>
-            <div class="form-group">
+              <div class="form-group">
             <label for="foto_cedula_frente_garante">Foto Cédula (Frente):</label>
             <button type="button" class="takePhoto" data-target="GaranteFrente">Tomar Foto</button>
             <video id="videoGaranteFrente" width="320" height="240" autoplay style="display:none;"></video>
@@ -261,10 +289,11 @@
                 <button type="button" id="generarPdf">Guardar como PDF</button>
               
             </div>
-        </form>
+       
 
     </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

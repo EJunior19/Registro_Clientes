@@ -21,43 +21,38 @@ function toggleConyuge() {
 }
 
 function updateBarrios() {
-    const ciudadSelect = document.getElementById('ciudad');
-    const barrioSelect = document.getElementById('barrio');
-    const ciudadSeleccionada = ciudadSelect.value;
-
-    // Limpiar opciones anteriores
-    barrioSelect.innerHTML = '';
-
-    let barrios = [];
-
-    if (ciudadSeleccionada === 'Salto del Guairá') {
-        barrios = [
-            'Jardín del Norte', 'Renacer', 'Nuevo Horizonte', 'San José', 'María Auxiliadora',
+   const barrioSelect = document.getElementById('barrio');
+    const barrios = [
+      'Jardín del Norte', 'Renacer', 'Nuevo Horizonte', 'San José', 'María Auxiliadora',
             'Karen Luana', 'Santa Teresa', 'Adela Speratti', 'San Blas', 'Villa Florida',
             'Stella Marys', 'Donde Nace El Sol', 'Santa Rosa', 'San Miguel', 'Primavera',
             'Residencial Acuario', 'Rayito de Sol Kilómetro 2', 'San Francisco', 'San Jorge',
             "Ko'e Rory", "San Juan", "8 de diciembre", "Cafetal guaraní", "15 de agosto",
             "Las palmeras", "Barrio Morán"
         ];
-    } else if (ciudadSeleccionada === 'Km 5') {
-        barrios = [];
-    }
+  // Limpiar opciones anteriores
+    barrioSelect.innerHTML = "";
+    // Agregar las opciones
+       let option = document.createElement("option");
+        option.value = "";
+        option.text = "Seleccione un barrio";
+        barrioSelect.add(option);
+    for (const barrio of barrios) {
+     option = document.createElement("option");
+      option.value = barrio;
+        option.text = barrio;
+        barrioSelect.add(option);
+        selectElement.add(option);
+       
+     
 
-    // Agregar nuevas opciones
-    barrios.forEach(barrio => {
-        const option = document.createElement('option');
-        option.value = barrio;
-        option.textContent = barrio;
-        barrioSelect.appendChild(option);
-    });
-}
+    }}
 
 function formatearNumero(input) {
     let numero = input.value.replace(/\D/g, '');
     numero = numero.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
     input.value = numero;
 }
-
 function formatearTelefono(input) {
     let telefono = input.value.replace(/\D/g, ''); // Eliminar caracteres no numéricos
     telefono = telefono.substring(0, 10); // Limitar a 10 dígitos (ejemplo)
@@ -74,50 +69,44 @@ function formatearTelefono(input) {
 document.addEventListener('DOMContentLoaded', function() {
     toggleGarante();
     toggleConyuge();
+ //Acceder a la cámara y tomar la foto
+  
+  const takePhotoButtons = document.querySelectorAll('.takePhoto');
+         
+ takePhotoButtons.forEach(button => {
+  const target = button.dataset.target;
+  let video,canvas,photo,fotoBase64Input;
 
-    // Acceder a la cámara al cargar la página y configurar los event listeners para las fotos
-    function setupCamera(target) {
-        const video = document.getElementById(`video${target}`);
-        const canvas = document.getElementById(`canvas${target}`);
-        const photo = document.getElementById(`photo${target}`);
-        const takePhotoBtn = document.getElementById(`takePhoto${target}`);
-        const fotoBase64Input = document.getElementById(`fotoBase64${target}`);
+  video = document.getElementById(`video${target}`);
+  canvas = document.getElementById(`canvas${target}`);
+  photo = document.getElementById(`photo${target}`);
+  fotoBase64Input = document.getElementById(`fotoBase64${target}`);
 
-        navigator.mediaDevices.getUserMedia({
-    video: { facingMode: { exact: "environment" } }
-  })
-            .then(function(stream) {
-                video.srcObject = stream;
-                video.style.display = 'block';
-            })
-            .catch(function(err) {
-                console.log("Ocurrió un error al acceder a la cámara: " + err);
-            });
-
-        takePhotoBtn.addEventListener('click', function() {
-            canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
-            let image_data_url = canvas.toDataURL('image/jpeg');
-
-            photo.setAttribute('src', image_data_url);
-            fotoBase64Input.setAttribute('value', image_data_url);
-
-            video.style.display = 'none';
-            canvas.style.display = 'none';
-            photo.style.display = 'block';
-        });
+    navigator.mediaDevices.getUserMedia({
+        video: {
+        facingMode: {
+          exact: "environment"
+        }
+      
     }
+  
+})
+    .then (stream => {
+     video.srcObject = stream;
+    })
+    .catch ( e =>
+{ console. log ("Error de la Camara");
+})
 
-    // Iterar sobre cada botón de tomar foto
-    const takePhotoButtons = document.querySelectorAll('.takePhoto');
-    takePhotoButtons.forEach(button => {
-        setupCamera(button.dataset.target);
-    
-  });
+takePhotoBtnFrente.addEventListener('click', function() {
+        canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+        let image_data_url = canvas.toDataURL('image/jpeg');
 
-
-        // Iniciar lista de barrios al cargar la página
-        updateBarrios();
     });
+  
+ });
+   updateBarrios();
+});
 
 document.getElementById('generarPdf').addEventListener('click', function() {
     // Crear un nuevo documento PDF
@@ -157,27 +146,56 @@ document.getElementById('generarPdf').addEventListener('click', function() {
     // Obtener el nombre del titular
     const nombreTitular = document.getElementById('nombre').value || 'registro_cliente';
     const filename = `${nombreTitular.replace(/\s+/g, '_').replace(/[^a-zA-Z0-9_]/g, '')}_${Date.now()}.pdf`;
-
-    // Obtener la imagen en Base64
+ // Obtener la imagen en Base64 del titular
     const fotoBase64TitularFrente = document.getElementById('fotoBase64TitularFrente').value;
     const fotoBase64TitularDorso = document.getElementById('fotoBase64TitularDorso').value;
-
-  const estadoCivil = document.getElementById('estado_civil').value;
-   ensureSpace(30)
-  if (estadoCivil === 'casada') {
-     const fotoBase64ConyugeFrente = document.getElementById('fotoBase64ConyugeFrente').value;
-    const fotoBase64ConyugeDorso = document.getElementById('fotoBase64ConyugeDorso').value;
-     ensureSpace(30)
-   }
-
-  const tieneGarante = document.getElementById('tiene_garante').value;
-        // Obtener la imagen en Base64 del GARANTE
-        if (tieneGarante === 'si') {
+ // OBTENER GARANTE
      const fotoBase64GaranteFrente = document.getElementById('fotoBase64GaranteFrente').value;
     const fotoBase64GaranteDorso = document.getElementById('fotoBase64GaranteDorso').value;
+
+// Obtener la imagen en Base64 del conyuge
+
+ const fotoBase64ConyugeFrente = document.getElementById('fotoBase64ConyugeFrente').value;
+    const fotoBase64ConyugeDorso = document.getElementById('fotoBase64ConyugeDorso').value;
+  ensureSpace(30);
+  
+    //Defino una variable para el estado del 
+
     
-        }
-     ensureSpace(30)
+    const nombre = document.getElementById('nombre').value;
+    const cedula = document.getElementById('cedula').value;
+        const telefono = document.getElementById('telefono').value;
+        const ciudad = document.getElementById('ciudad').value;
+        const barrio = document.getElementById('barrio').value;
+        const estadoCivil = document.getElementById('estado_civil').value;
+        const vivePareja = document.getElementById('vive_pareja').value;
+  const nombreConyuge = document.getElementById('nombre_conyuge').value;
+        const lugarTrabajoConyuge = document.getElementById('lugar_trabajo_conyuge').value;
+        const ingresoConyuge = document.getElementById('ingreso_conyuge').value;
+        const lugarTrabajoTitular = document.getElementById('lugar_trabajo_titular').value;
+        const tiempoTrabajo = document.getElementById('tiempo_trabajo').value;
+        const ingresoMensualTitular = document.getElementById('ingreso_mensual_titular').value;
+        const contactoLaboral = document.getElementById('contacto_laboral').value;
+ const nombreProducto = document.getElementById('nombre_producto').value;
+        const codigoProducto = document.getElementById('codigo_producto').value;
+        const cuotas = document.getElementById('cuotas').value;
+        const montoCuota = document.getElementById('monto_cuota').value;
+        const entregaInicial = document.getElementById('entrega_inicial').value;
+ const nombreRef1 = document.getElementById('nombre_ref1').value;
+        const relacionRef1 = document.getElementById('relacion_ref1').value;
+        const telefonoRef1 = document.getElementById('telefono_ref1').value;
+ const nombreRef2 = document.getElementById('nombre_ref2').value;
+        const relacionRef2 = document.getElementById('relacion_ref2').value;
+        const telefonoRef2 = document.getElementById('telefono_ref2').value;
+
+        const nombreRef3 = document.getElementById('nombre_ref3').value;
+        const relacionRef3 = document.getElementById('relacion_ref3').value;
+        const telefonoRef3 = document.getElementById('telefono_ref3').value;
+        
+        const quienUsa = document.getElementById('quien_usa').value;
+        const tieneGarante = document.getElementById('tiene_garante').value;
+        const observaciones = document.getElementById('observaciones').value;
+ 
 
     // Título del PDF
     addText('Registro de Visita a Cliente', { fontSize: 18, fontWeight: 'bold' });
@@ -185,13 +203,13 @@ document.getElementById('generarPdf').addEventListener('click', function() {
     ensureSpace(50)
     // Datos del cliente
     addText('Datos del Cliente:', { fontSize: 14, fontWeight: 'bold' });
-    addText(`Nombre y Apellido: ${document.getElementById('nombre').value}`);
-    addText(`Cédula: ${document.getElementById('cedula').value}`);
-    addText(`Teléfono: ${document.getElementById('telefono').value}`);
-    addText(`Ciudad: ${document.getElementById('ciudad').value}, Barrio: ${document.getElementById('barrio').value}`);
-    addText(`Estado Civil: ${document.getElementById('estado_civil').value}`);
-    addText(`¿Vive con su pareja?: ${document.getElementById('vive_pareja').value}`);
-    if (fotoBase64TitularFrente) {
+    addText(`Nombre y Apellido: ${nombre}`);
+    addText(`Cédula: ${cedula}`);
+    addText(`Teléfono: ${telefono}`);
+    addText(`Ciudad: ${ciudad}, Barrio: ${barrio}`);
+    addText(`Estado Civil: ${estadoCivil}`);
+    addText(`¿Vive con su pareja?: ${vivePareja === 'si' ? 'Sí' : 'No'}`);
+        if (fotoBase64TitularFrente) {
         doc.addImage(fotoBase64TitularFrente, 'JPEG', margin, y, 80, 60); // Ajusta la posición y el tamaño según sea necesario
         y += 70;
     }
@@ -202,69 +220,69 @@ document.getElementById('generarPdf').addEventListener('click', function() {
     }
 
     y += 5;
-     ensureSpace(50)
+    
     // Datos del cónyuge (si aplica)
     if (document.getElementById('estado_civil').value === 'casada') {
         addText('Datos del Cónyuge:', { fontSize: 14, fontWeight: 'bold' });
-        addText(`Nombre Completo: ${document.getElementById('nombre_conyuge').value}`);
-        addText(`Lugar de Trabajo: ${document.getElementById('lugar_trabajo_conyuge').value}`);
-        addText(`Ingreso Mensual: ${document.getElementById('ingreso_conyuge').value}`);
-  
+        addText(`Nombre Completo: ${nombreConyuge}`);
+        addText(`Lugar de Trabajo: ${lugarTrabajoConyuge}`);
+        addText(`Ingreso Mensual: ${ingresoConyuge}`);
+         // Agregar la imagen al PDF (CONYUGE)
         if (fotoBase64ConyugeFrente) {
         doc.addImage(fotoBase64ConyugeFrente, 'JPEG', margin, y, 80, 60); // Ajusta la posición y el tamaño según sea necesario
         y += 70;
     }
-       ensureSpace(100)
-     if (fotoBase64ConyugeDorso) {
+        ensureSpace(100)
+    if (fotoBase64ConyugeDorso) {
         doc.addImage(fotoBase64ConyugeDorso, 'JPEG', margin, y, 80, 60); // Ajusta la posición y el tamaño según sea necesario
         y += 70;
     }
-
+ensureSpace(50)
         y += 5;
-        ensureSpace(50)
+     
     }
  // Agregar la imagen al PDF (GARANTE)
       if (fotoBase64GaranteFrente) {
         doc.addImage(fotoBase64GaranteFrente, 'JPEG', margin, y, 80, 60); // Ajusta la posición y el tamaño según sea necesario
         y += 70;
     }
+       ensureSpace(100)
      if (fotoBase64GaranteDorso) {
         doc.addImage(fotoBase64GaranteDorso, 'JPEG', margin, y, 80, 60); // Ajusta la posición y el tamaño según sea necesario
         y += 70;
     }
+       ensureSpace(50)
     // Información Laboral del Titular
     addText('Información Laboral del Titular:', { fontSize: 14, fontWeight: 'bold' });
-    addText(`Lugar de Trabajo: ${document.getElementById('lugar_trabajo_titular').value}`);
-    addText(`Tiempo en el Trabajo: ${document.getElementById('tiempo_trabajo').value}`);
-    addText(`Ingreso Mensual: ${document.getElementById('ingreso_mensual_titular').value}`);
-    addText(`Contacto Laboral: ${document.getElementById('contacto_laboral').value}`);
+    addText(`Lugar de Trabajo: ${lugarTrabajoTitular}`);
+    addText(`Tiempo en el Trabajo: ${tiempoTrabajo}`);
+    addText(`Ingreso Mensual: ${ingresoMensualTitular}`);
+    addText(`Contacto Laboral: ${contactoLaboral}`);
     y += 5;
    ensureSpace(50)
     // Producto solicitado
     addText('Producto Solicitado:', { fontSize: 14, fontWeight: 'bold' });
-    addText(`Nombre del Producto: ${document.getElementById('nombre_producto').value}`);
-    addText(`Código: ${document.getElementById('codigo_producto').value}`);
-    addText(`Cuotas: ${document.getElementById('cuotas').value}`);
-    addText(`Monto de Cuota: ${document.getElementById('monto_cuota').value}`);
-    addText(`¿Hay entrega inicial?: ${document.getElementById('entrega_inicial').value}`);
+    addText(`Nombre del Producto: ${nombreProducto}`);
+    addText(`Código: ${codigoProducto}`);
+    addText(`Cuotas: ${cuotas}`);
+    addText(`Monto de Cuota: ${montoCuota}`);
+    addText(`¿Hay entrega inicial?: ${entregaInicial === 'si' ? 'Sí' : 'No'}`);
     y += 5;
     ensureSpace(100)
     // Referencias personales
     addText('Referencias Personales:', { fontSize: 14, fontWeight: 'bold' });
-    addText(`Referencia 1 - Nombre: ${document.getElementById('nombre_ref1').value}, Relación: ${document.getElementById('relacion_ref1').value}, Teléfono: ${document.getElementById('telefono_ref1').value}`);
-    addText(`Referencia 2 - Nombre: ${document.getElementById('nombre_ref2').value}, Relación: ${document.getElementById('relacion_ref2').value}, Teléfono: ${document.getElementById('telefono_ref2').value}`);
-    addText(`Referencia 3 - Nombre: ${document.getElementById('nombre_ref3').value}, Relación: ${document.getElementById('relacion_ref3').value}, Teléfono: ${document.getElementById('telefono_ref3').value}`);
+    addText(`Referencia 1 - Nombre: ${nombreRef1}, Relación: ${relacionRef1}, Teléfono: ${telefonoRef1}`);
+    addText(`Referencia 2 - Nombre: ${nombreRef2}, Relación: ${relacionRef2}, Teléfono: ${telefonoRef2}`);
+    addText(`Referencia 3 - Nombre: ${nombreRef3}, Relación: ${relacionRef3}, Teléfono: ${telefonoRef3}`);
     y += 5;
     ensureSpace(100)
     // Otros
     addText('Otros:', { fontSize: 14, fontWeight: 'bold' });
-    addText(`¿Quién usará el producto?: ${document.getElementById('quien_usa').value}`);
-    addText(`¿Tiene garante?: ${document.getElementById('tiene_garante').value}`);
-    
-   y += 5;
-    ensureSpace(50)
-     addText(`Observaciones Generales: ${document.getElementById('observaciones').value}`);
-         
-    // Guardar el PDF
+    addText(`¿Quién usará el producto?: ${quienUsa}`);
+    addText(`¿Tiene garante?: ${tieneGarante === 'si' ? 'Sí' : 'No'}`);
+ 
+        ensureSpace(50)
+ // Guardar el PDF
     doc.save(filename);
 });
+ 
