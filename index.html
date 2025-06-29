@@ -34,10 +34,35 @@
             <div class="form-group">
                 <label for="barrio">Barrio:</label>
                 <select id="barrio" name="barrio" id="barrioSelect">
-                 
+                    <option value="">Seleccione un barrio</option>
+                    <option value="Jardín del Norte">Jardín del Norte</option>
+                    <option value="Renacer">Renacer</option>
+                    <option value="Nuevo Horizonte">Nuevo Horizonte</option>
+                    <option value="San José">San José</option>
+                    <option value="María Auxiliadora">María Auxiliadora</option>
+                    <option value="Karen Luana">Karen Luana</option>
+                    <option value="Santa Teresa">Santa Teresa</option>
+                    <option value="San Blas">San Blas</option>
+                    <option value="Villa Florida">Villa Florida</option>
+                    <option value="Stella Marys">Stella Marys</option>
+                    <option value="Donde Nace El Sol">Donde Nace El Sol</option>
+                    <option value="Santa Rosa">Santa Rosa</option>
+                    <option value="San Miguel">San Miguel</option>
+                    <option value="Primavera">Primavera</option>
+                    <option value="Residencial Acuario">Residencial Acuario</option>
+                    <option value="Rayito de Sol Kilómetro 2">Rayito de Sol Kilómetro 2</option>
+                    <option value="San Francisco">San Francisco</option>
+                    <option value="San Jorge">San Jorge</option>
+                    <option value="Ko'e Rory">Ko'e Rory</option>
+                    <option value="San Juan">San Juan</option>
+                    <option value="8 de diciembre">8 de diciembre</option>
+                    <option value="Cafetal guaraní">Cafetal guaraní</option>
+                    <option value="15 de agosto">15 de agosto</option>
+                    <option value="Las palmeras">Las palmeras</option>
+                    <option value="Barrio Morán">Barrio Morán</option>
+                    <option value="otro">Otro</option>
                 </select>
                 <input type="text" id="otroBarrio" name="otroBarrio" style="display:none;" placeholder="Ingrese el nombre del barrio">
-             
             </div>
             <div class="form-group">
                 <label for="estado_civil">Estado Civil:</label>
@@ -53,28 +78,35 @@
                     <option value="no">No</option>
                 </select>
             </div>
-            <div class="form-group">
+<div class="form-group">
                 <label for="foto_cedula_frente">Foto Cédula (Frente):</label>
                 <button type="button" class="takePhoto" data-target="TitularFrente">Activar Cámara (Frente)</button>
-                <video id="videoTitularFrente" width="320" height="240" autoplay muted playsinline style="display:none;"></video>
-                <canvas id="canvasTitularFrente" width="320" height="240" style="display:none;"></canvas>
+                <video id="videoTitularFrente" width="80" height="50" autoplay style="display:none;" muted playsinline></video>
+                 <button type="button" class ="Capturar" data-target="TitularFrente" id="Capturar_videoTitularFrente" style="display:none;" >Capturar foto</button>
+                <canvas id="canvasTitularFrente" width="80" height="50" style="display:none;"></canvas>
                 <img id="photoTitularFrente" alt="Foto Cédula (Frente)" style="max-width: 100%; height: auto;">
                 <input type="hidden" id="fotoBase64TitularFrente" name="fotoBase64TitularFrente">
-            </div>
-            <div class="form-group">
-                <label for="foto_cedula_dorso">Foto Cédula (Dorso):</label>
-                <button type="button" class ="Capturar" data-target="TitularDorso" id="takePhotoTitularDorso">Capturar foto</button>
-                <video id="videoTitularDorso" width="320" height="240" style="display:none;" autoplay muted playsinline></video>
-                <canvas id="canvasTitularDorso" width="320" height="240" style="display:none;"></canvas>
-                <img id="photoTitularDorso" alt="Foto Cédula (Dorso)" style="max-width: 100%; height: auto;">
-                <input type="hidden" id="fotoBase64TitularDorso" name="fotoBase64TitularDorso">
-            </div>
-      <div id="asesorSection" >
-                <h4>Junior Enciso - Asesor</h4>
-              
-  
-      </div>
-        </section>
+        </div>
+
+ <div class="form-group">
+            <label for="foto_cedula_dorso">Foto Cédula (Dorso):</label>
+            <button type="button" class="takePhoto" data-target="TitularDorso">Activar Cámara (Dorso)</button>
+            <video id="videoTitularDorso" width="80" height="50" style="display:none;" autoplay muted playsinline></video>
+   <button type="button" class ="Capturar" data-target="TitularDorso" id="Capturar_videoTitularDorso" style="display:none;">Capturar foto</button>
+            <canvas id="canvasTitularDorso" width="80" height="50" style="display:none;"></canvas>
+            <img id="photoTitularDorso" alt="Foto Cédula (Dorso)" style="max-width: 100%; height: auto;">
+            <input type="hidden" id="fotoBase64TitularDorso" name="fotoBase64TitularDorso">
+   </div>
+ < div id="asesorSection" >
+         
+               
+
+    
+
+           
+
+            
+        
 
         <section id="conyugeSection" class="conyuge" style="display: none;">
             <h2>Datos del Cónyuge (si aplica)</h2>
@@ -82,18 +114,11 @@
                 <label for="nombre_conyuge">Nombre Completo:</label>
                 <input type="text" id="nombre_conyuge" name="nombre_conyuge">
             </div>
-            <div class="form-group">
-                <label for="lugar_trabajo_conyuge">Lugar de Trabajo:</label>
-                <input type="text" id="lugar_trabajo_conyuge" name="lugar_trabajo_conyuge">
-            </div>
-            <div class="form-group">
-                <label for="ingreso_conyuge">Ingreso Mensual:</label>
-                <input type="text" id="ingreso_conyuge" name="ingreso_conyuge" oninput="formatearNumero(this)">
-            </div>
              <div class="form-group">
             <label for="foto_cedula_frente_conyuge">Foto Cédula (Frente):</label>
             <button type="button" class ="Capturar" data-target="ConyugeFrente" id="takePhotoConyugeFrente">Activar Camara</button>
             <video id="videoConyugeFrente" width="320" height="240" style="display:none;" autoplay muted playsinline></video>
+                <button type="button" id="capturePhotoConyugeFrente" style="display:none;"></button>
             <canvas id="canvasConyugeFrente" width="320" height="240" style="display:none;"></canvas>
             <img id="photoConyugeFrente" alt="Foto Cédula (Frente)" style="max-width: 100%; height: auto;">
             <input type="hidden" id="fotoBase64ConyugeFrente" name="fotoBase64ConyugeFrente">
@@ -106,6 +131,14 @@
             <img id="photoConyugeDorso" alt="Foto Cédula (Dorso)" style="max-width: 100%; height: auto;">
             <input type="hidden" id="fotoBase64ConyugeDorso" name="fotoBase64ConyugeDorso">
         </div>
+            <div class="form-group">
+                <label for="lugar_trabajo_conyuge">Lugar de Trabajo:</label>
+                <input type="text" id="lugar_trabajo_conyuge" name="lugar_trabajo_conyuge">
+            </div>
+            <div class="form-group">
+                <label for="ingreso_conyuge">Ingreso Mensual:</label>
+                <input type="text" id="ingreso_conyuge" name="ingreso_conyuge" oninput="formatearNumero(this)">
+            </div>
         </section>
 
         <section class="laboral">
@@ -225,20 +258,23 @@
                   <label for="nombre_garante">Nombre Completo:</label>
                   <input type="text" id="nombre_garante" name="nombre_garante">
               </div>
-             <div class="form-group">
+           <div class="form-group">
             <label for="foto_cedula_frente_garante">Foto Cédula (Frente):</label>
             <button type="button"  class ="Capturar" data-target="GaranteFrente" id="takePhotoGaranteFrente">Activar Camara</button>
-              <video id="videoGaranteFrente" width="320" height="240" style="display:none;" autoplay muted playsinline></video>
-             <!--    <button type="button" id="capturePhotoGaranteFrente" data-target="GaranteFrente">Capturar foto</button> -->
-            <canvas id="canvasGaranteFrente" width="320" height="240" style="display:none;"></canvas>
+              <video id="videoGaranteFrente" width="80" height="50" style="display:none;" autoplay muted playsinline></video>
+               <button type="button" class ="TomarFotos" data-target="GaranteFrente" id="TomarFotos_GarantesFrente"  style="display:none;"  >Tomar Foto</button>
+
+            <canvas id="canvasGaranteFrente" width="80" height="50" style="display:none;"></canvas>
             <img id="photoGaranteFrente" alt="Foto Cédula (Frente)" style="max-width: 100%; height: auto;">
             <input type="hidden" id="fotoBase64GaranteFrente" name="fotoBase64GaranteFrente">
-        </div>
+              <div class="form-group">
          <div class="form-group">
             <label for="foto_cedula_dorso_garante">Foto Cédula (Dorso):</label>
             <button type="button"  class ="Capturar" data-target="GaranteDorso" id="takePhotoGaranteDorso">Activar Camara</button>
-            <video id="videoGaranteDorso" width="320" height="240" style="display:none;" autoplay muted playsinline></video>
-            <canvas id="canvasGaranteDorso" width="320" height="240" style="display:none;"></canvas>
+             <button type="button" class ="TomarFotos" data-target="GaranteDorso" id="TomarFotos_GaranteDorso"  style="display:none;"  >Tomar Foto</button>
+             
+            <video id="videoGaranteDorso" width="80" height="50" style="display:none;" autoplay muted playsinline></video>
+            <canvas id="canvasGaranteDorso" width="80" height="50" style="display:none;"></canvas>
             <img id="photoGaranteDorso" alt="Foto Cédula (Dorso)" style="max-width: 100%; height: auto;">
             <input type="hidden" id="fotoBase64GaranteDorso" name="fotoBase64GaranteDorso">
         </div>
@@ -268,27 +304,63 @@
                     <textarea id="observaciones" name="observaciones" rows="4"></textarea>
                 </div>
             </section>
-   <!--Datos del Asesor--> 
 
-          <section> <h2>Junior Enciso Asesor</h2>
-   Telefono <input type="tel" id="telefono_asesor" name="telefono_asesor" value="0985 933 978" readonly>
-   Direccion : <input type="text" id="direccion_asesor" name="direccion_asesor" value="Show S.A" readonly>
+            <section > <h2>Junior Enciso - Asesor</h2>
+        
 
-    <!--Fin Asesor--></section>
+        
 
-            <div class="button-container">
+    
+
+    
+
+         
+
+            
+               
+
+
+       
+
+
+    
+        
+    </section>
+        <div class="button-container">
+            
+                
+
+                 <input  style="display:none;"   type="text" id="texto_informe" value= " Junior Enciso Asesor Telefono : 0985 933847 Direccion : Adela Espeatti"  />
+                
                 <button type="button" id="generarPdf">Guardar como PDF</button>
+             
+
            
+
+           
+    
+
+  
+
+  
+
+
+    
+    
+  
+
  
 
+  
    
 
-   
+
 
     
 
  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <script src="script.js"></script>
+
+<script src="script.js"></script>
 </body>
-</html> 
+</html>
     
