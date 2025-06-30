@@ -20,6 +20,10 @@
                 <input type="text" id="nombre" name="nombre" required>
             </div>
             <div class="form-group">
+                <label for="direccion">Dirección:</label>
+                <input type="text" id="direccion" name="direccion">
+            </div>
+            <div class="form-group">
                 <label for="cedula">Cédula:</label>
                 <input type="text" id="cedula" name="cedula" required>
             </div>
@@ -33,7 +37,7 @@
             </div>
             <div class="form-group">
                 <label for="barrio">Barrio:</label>
-                <select id="barrio" name="barrio" id="barrioSelect">
+                <select id="barrio" name="barrio" onchange="toggleOtroBarrio('cliente')">
                     <option value="">Seleccione un barrio</option>
                     <option value="Jardín del Norte">Jardín del Norte</option>
                     <option value="Renacer">Renacer</option>
@@ -42,6 +46,7 @@
                     <option value="María Auxiliadora">María Auxiliadora</option>
                     <option value="Karen Luana">Karen Luana</option>
                     <option value="Santa Teresa">Santa Teresa</option>
+                    <option value="Adela Speratti">Adela Speratti</option>
                     <option value="San Blas">San Blas</option>
                     <option value="Villa Florida">Villa Florida</option>
                     <option value="Stella Marys">Stella Marys</option>
@@ -62,7 +67,7 @@
                     <option value="Barrio Morán">Barrio Morán</option>
                     <option value="otro">Otro</option>
                 </select>
-                <input type="text" id="otroBarrio" name="otroBarrio" style="display:none;" placeholder="Ingrese el nombre del barrio">
+                <input type="text" id="otroBarrioInputCliente" name="otroBarrioCliente" style="display: none;" placeholder="Ingrese el nombre del barrio">
             </div>
             <div class="form-group">
                 <label for="estado_civil">Estado Civil:</label>
@@ -78,68 +83,68 @@
                     <option value="no">No</option>
                 </select>
             </div>
-<div class="form-group">
-                <label for="foto_cedula_frente">Foto Cédula (Frente):</label>
-                <button type="button" class="takePhoto" data-target="TitularFrente">Activar Cámara (Frente)</button>
-                <video id="videoTitularFrente" width="80" height="50" autoplay style="display:none;" muted playsinline></video>
-                 <button type="button" class ="Capturar" data-target="TitularFrente" id="Capturar_videoTitularFrente" style="display:none;" >Capturar foto</button>
-                <canvas id="canvasTitularFrente" width="80" height="50" style="display:none;"></canvas>
-                <img id="photoTitularFrente" alt="Foto Cédula (Frente)" style="max-width: 100%; height: auto;">
-                <input type="hidden" id="fotoBase64TitularFrente" name="fotoBase64TitularFrente">
-        </div>
+        </section>
 
- <div class="form-group">
-            <label for="foto_cedula_dorso">Foto Cédula (Dorso):</label>
-            <button type="button" class="takePhoto" data-target="TitularDorso">Activar Cámara (Dorso)</button>
-            <video id="videoTitularDorso" width="80" height="50" style="display:none;" autoplay muted playsinline></video>
-   <button type="button" class ="Capturar" data-target="TitularDorso" id="Capturar_videoTitularDorso" style="display:none;">Capturar foto</button>
-            <canvas id="canvasTitularDorso" width="80" height="50" style="display:none;"></canvas>
-            <img id="photoTitularDorso" alt="Foto Cédula (Dorso)" style="max-width: 100%; height: auto;">
-            <input type="hidden" id="fotoBase64TitularDorso" name="fotoBase64TitularDorso">
-   </div>
- < div id="asesorSection" >
-         
-               
+              
+<section id="conyugeSection" class="conyuge" style="display: none;">
+    <h2>Datos del Cónyuge (si aplica)</h2>
+    <div class="form-group">
+        <label for="nombre_conyuge">Nombre Completo:</label>
+        <input type="text" id="nombre_conyuge" name="nombre_conyuge">
+    </div>
+    <div class="form-group">
+        <label for="direccion_conyuge">Dirección:</label>
+        <input type="text" id="direccion_conyuge" name="direccion_conyuge">
+    </div>
+    <div class="form-group">
+        <label for="barrio_conyuge">Barrio:</label>
+        <select id="barrio_conyuge" name="barrio_conyuge" onchange="toggleOtroBarrio('conyuge')">
+            <option value="">Seleccione un barrio</option>
+            <option value="Jardín del Norte">Jardín del Norte</option>
+            <option value="Renacer">Renacer</option>
+            <option value="Nuevo Horizonte">Nuevo Horizonte</option>
+            <option value="San José">San José</option>
+            <option value="María Auxiliadora">María Auxiliadora</option>
+            <option value="Karen Luana">Karen Luana</option>
+            <option value="Santa Teresa">Santa Teresa</option>
+            <option value="Adela Speratti">Adela Speratti</option>
+            <option value="San Blas">San Blas</option>
+            <option value="Villa Florida">Villa Florida</option>
+            <option value="Stella Marys">Stella Marys</option>
+            <option value="Donde Nace El Sol">Donde Nace El Sol</option>
+            <option value="Santa Rosa">Santa Rosa</option>
+            <option value="San Miguel">San Miguel</option>
+            <option value="Primavera">Primavera</option>
+            <option value="Residencial Acuario">Residencial Acuario</option>
+            <option value="Rayito de Sol Kilómetro 2">Rayito de Sol Kilómetro 2</option>
+            <option value="San Francisco">San Francisco</option>
+            <option value="San Jorge">San Jorge</option>
+            <option value="Ko'e Rory">Ko'e Rory</option>
+            <option value="San Juan">San Juan</option>
+            <option value="8 de diciembre">8 de diciembre</option>
+            <option value="Cafetal guaraní">Cafetal guaraní</option>
+            <option value="15 de agosto">15 de agosto</option>
+            <option value="Las palmeras">Las palmeras</option>
+            <option value="Barrio Morán">Barrio Morán</option>
+            <option value="otro">Otro</option>
+        </select>
+        <input type="text" id="otroBarrioInputConyuge" name="otroBarrioConyuge" style="display: none;" placeholder="Ingrese el nombre del barrio">
+    </div>
+    <div class="form-group">
+        <label for="lugar_trabajo_conyuge">Lugar de Trabajo:</label>
+        <input type="text" id="lugar_trabajo_conyuge" name="lugar_trabajo_conyuge">
+    </div>
+    <div class="form-group">
+        <label for="antiguedad_trabajo_conyuge">Antigüedad en el Trabajo:</label>
+        <input type="text" id="antiguedad_trabajo_conyuge" name="antiguedad_trabajo_conyuge">
+    </div>
+    <div class="form-group">
+        <label for="ingreso_conyuge">Ingreso Mensual:</label>
+        <input type="text" id="ingreso_conyuge" name="ingreso_conyuge" oninput="formatearNumero(this)">
+    </div>
+</section>
 
     
-
-           
-
-            
-        
-
-        <section id="conyugeSection" class="conyuge" style="display: none;">
-            <h2>Datos del Cónyuge (si aplica)</h2>
-            <div class="form-group">
-                <label for="nombre_conyuge">Nombre Completo:</label>
-                <input type="text" id="nombre_conyuge" name="nombre_conyuge">
-            </div>
-             <div class="form-group">
-            <label for="foto_cedula_frente_conyuge">Foto Cédula (Frente):</label>
-            <button type="button" class ="Capturar" data-target="ConyugeFrente" id="takePhotoConyugeFrente">Activar Camara</button>
-            <video id="videoConyugeFrente" width="320" height="240" style="display:none;" autoplay muted playsinline></video>
-                <button type="button" id="capturePhotoConyugeFrente" style="display:none;"></button>
-            <canvas id="canvasConyugeFrente" width="320" height="240" style="display:none;"></canvas>
-            <img id="photoConyugeFrente" alt="Foto Cédula (Frente)" style="max-width: 100%; height: auto;">
-            <input type="hidden" id="fotoBase64ConyugeFrente" name="fotoBase64ConyugeFrente">
-         </div>
-         <div class="form-group">
-            <label for="foto_cedula_dorso_conyuge">Foto Cédula (Dorso):</label>
-            <button type="button"  class ="Capturar" data-target="ConyugeDorso" id="takePhotoConyugeDorso">Activar Camara</button>
-            <video id="videoConyugeDorso" width="320" height="240" style="display:none;" autoplay muted playsinline></video>
-            <canvas id="canvasConyugeDorso" width="320" height="240" style="display:none;"></canvas>
-            <img id="photoConyugeDorso" alt="Foto Cédula (Dorso)" style="max-width: 100%; height: auto;">
-            <input type="hidden" id="fotoBase64ConyugeDorso" name="fotoBase64ConyugeDorso">
-        </div>
-            <div class="form-group">
-                <label for="lugar_trabajo_conyuge">Lugar de Trabajo:</label>
-                <input type="text" id="lugar_trabajo_conyuge" name="lugar_trabajo_conyuge">
-            </div>
-            <div class="form-group">
-                <label for="ingreso_conyuge">Ingreso Mensual:</label>
-                <input type="text" id="ingreso_conyuge" name="ingreso_conyuge" oninput="formatearNumero(this)">
-            </div>
-        </section>
 
         <section class="laboral">
             <h2>Información Laboral del Titular</h2>
@@ -157,7 +162,7 @@
             </div>
             <div class="form-group">
                 <label for="contacto_laboral">Contacto Laboral:</label>
-                <input type="tel" id="contacto_laboral" name="contacto_laboral">
+                <input type="tel" id="contacto_laboral" name="contacto_laboral" oninput="formatearTelefono(this)">
             </div>
         </section>
 
@@ -181,10 +186,14 @@
             </div>
             <div class="form-group">
                 <label for="entrega_inicial">¿Hay entrega inicial?</label>
-                <select id="entrega_inicial" name="entrega_inicial">
-                    <option value="si">Sí</option>
+                <select id="entrega_inicial" name="entrega_inicial" onchange="toggleEntregaInicial()">
                     <option value="no">No</option>
+                    <option value="si">Sí</option>
                 </select>
+            </div>
+            <div class="form-group" id="montoEntregaInicial" style="display: none;">
+                <label for="monto_entrega">Monto de Entrega Inicial:</label>
+                <input type="text" id="monto_entrega" name="monto_entrega" oninput="formatearNumero(this)">
             </div>
         </section>
 
@@ -195,6 +204,44 @@
                 <div class="form-group">
                     <label for="nombre_ref1">Nombre:</label>
                     <input type="text" id="nombre_ref1" name="nombre_ref1">
+                </div>
+                <div class="form-group">
+                    <label for="direccion_ref1">Dirección:</label>
+                    <input type="text" id="direccion_ref1" name="direccion_ref1">
+                </div>
+                <div class="form-group">
+                    <label for="barrio_ref1">Barrio:</label>
+                    <select id="barrio_ref1" name="barrio_ref1" onchange="toggleOtroBarrio('ref1')">
+                        <option value="">Seleccione un barrio</option>
+                        <option value="Jardín del Norte">Jardín del Norte</option>
+                        <option value="Renacer">Renacer</option>
+                        <option value="Nuevo Horizonte">Nuevo Horizonte</option>
+                        <option value="San José">San José</option>
+                        <option value="María Auxiliadora">María Auxiliadora</option>
+                        <option value="Karen Luana">Karen Luana</option>
+                        <option value="Santa Teresa">Santa Teresa</option>
+                        <option value="Adela Speratti">Adela Speratti</option>
+                        <option value="San Blas">San Blas</San Blas</option>
+                        <option value="Villa Florida">Villa Florida</option>
+                        <option value="Stella Marys">Stella Marys</option>
+                        <option value="Donde Nace El Sol">Donde Nace El Sol</option>
+                        <option value="Santa Rosa">Santa Rosa</option>
+                        <option value="San Miguel">San Miguel</option>
+                        <option value="Primavera">Primavera</option>
+                        <option value="Residencial Acuario">Residencial Acuario</option>
+                        <option value="Rayito de Sol Kilómetro 2">Rayito de Sol Kilómetro 2</option>
+                        <option value="San Francisco">San Francisco</option>
+                        <option value="San Jorge">San Jorge</option>
+                        <option value="Ko'e Rory">Ko'e Rory</option>
+                        <option value="San Juan">San Juan</option>
+                        <option value="8 de diciembre">8 de diciembre</option>
+                        <option value="Cafetal guaraní">Cafetal guaraní</option>
+                        <option value="15 de agosto">15 de agosto</option>
+                        <option value="Las palmeras">Las palmeras</option>
+                        <option value="Barrio Morán">Barrio Morán</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                    <input type="text" id="otroBarrioInputRef1" name="otroBarrioRef1" style="display: none;" placeholder="Ingrese el nombre del barrio">
                 </div>
                 <div class="form-group">
                     <label for="relacion_ref1">Relación:</label>
@@ -213,6 +260,44 @@
                     <input type="text" id="nombre_ref2" name="nombre_ref2">
                 </div>
                 <div class="form-group">
+                    <label for="direccion_ref2">Dirección:</label>
+                    <input type="text" id="direccion_ref2" name="direccion_ref2">
+                </div>
+                <div class="form-group">
+                    <label for="barrio_ref2">Barrio:</label>
+                    <select id="barrio_ref2" name="barrio_ref2" onchange="toggleOtroBarrio('ref2')">
+                        <option value="">Seleccione un barrio</option>
+                        <option value="Jardín del Norte">Jardín del Norte</option>
+                        <option value="Renacer">Renacer</option>
+                        <option value="Nuevo Horizonte">Nuevo Horizonte</option>
+                        <option value="San José">San José</option>
+                        <option value="María Auxiliadora">María Auxiliadora</option>
+                        <option value="Karen Luana">Karen Luana</option>
+                        <option value="Santa Teresa">Santa Teresa</option>
+                        <option value="Adela Speratti">Adela Speratti</option>
+                        <option value="San Blas">San Blas</option>
+                        <option value="Villa Florida">Villa Florida</option>
+                        <option value="Stella Marys">Stella Marys</option>
+                        <option value="Donde Nace El Sol">Donde Nace El Sol</option>
+                        <option value="Santa Rosa">Santa Rosa</option>
+                        <option value="San Miguel">San Miguel</option>
+                        <option value="Primavera">Primavera</option>
+                        <option value="Residencial Acuario">Residencial Acuario</option>
+                        <option value="Rayito de Sol Kilómetro 2">Rayito de Sol Kilómetro 2</option>
+                        <option value="San Francisco">San Francisco</option>
+                        <option value="San Jorge">San Jorge</option>
+                        <option value="Ko'e Rory">Ko'e Rory</option>
+                        <option value="San Juan">San Juan</option>
+                        <option value="8 de diciembre">8 de diciembre</option>
+                        <option value="Cafetal guaraní">Cafetal guaraní</option>
+                        <option value="15 de agosto">15 de agosto</option>
+                        <option value="Las palmeras">Las palmeras</option>
+                        <option value="Barrio Morán">Barrio Morán</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                    <input type="text" id="otroBarrioInputRef2" name="otroBarrioRef2" style="display: none;" placeholder="Ingrese el nombre del barrio">
+                </div>
+                <div class="form-group">
                     <label for="relacion_ref2">Relación:</label>
                     <input type="text" id="relacion_ref2" name="relacion_ref2">
                 </div>
@@ -222,11 +307,49 @@
                 </div>
             </div>
 
-           <div class="referencia">
+            <div class="referencia">
                 <h3>Referencia 3</h3>
                 <div class="form-group">
                     <label for="nombre_ref3">Nombre:</label>
                     <input type="text" id="nombre_ref3" name="nombre_ref3">
+                </div>
+                <div class="form-group">
+                    <label for="direccion_ref3">Dirección:</label>
+                    <input type="text" id="direccion_ref3" name="direccion_ref3">
+                </div>
+                <div class="form-group">
+                    <label for="barrio_ref3">Barrio:</label>
+                    <select id="barrio_ref3" name="barrio_ref3" onchange="toggleOtroBarrio('ref3')">
+                        <option value="">Seleccione un barrio</option>
+                        <option value="Jardín del Norte">Jardín del Norte</option>
+                        <option value="Renacer">Renacer</option>
+                        <option value="Nuevo Horizonte">Nuevo Horizonte</option>
+                        <option value="San José">San José</option>
+                        <option value="María Auxiliadora">María Auxiliadora</option>
+                        <option value="Karen Luana">Karen Luana</option>
+                        <option value="Santa Teresa">Santa Teresa</option>
+                        <option value="Adela Speratti">Adela Speratti</option>
+                        <option value="San Blas">San Blas</option>
+                        <option value="Villa Florida">Villa Florida</option>
+                        <option value="Stella Marys">Stella Marys</option>
+                        <option value="Donde Nace El Sol">Donde Nace El Sol</option>
+                        <option value="Santa Rosa">Santa Rosa</option>
+                        <option value="San Miguel">San Miguel</option>
+                        <option value="Primavera">Primavera</option>
+                        <option value="Residencial Acuario">Residencial Acuario</option>
+                        <option value="Rayito de Sol Kilómetro 2">Rayito de Sol Kilómetro 2</option>
+                        <option value="San Francisco">San Francisco</option>
+                        <option value="San Jorge">San Jorge</option>
+                        <option value="Ko'e Rory">Ko'e Rory</option>
+                        <option value="San Juan">San Juan</option>
+                        <option value="8 de diciembre">8 de diciembre</option>
+                        <option value="Cafetal guaraní">Cafetal guaraní</option>
+                        <option value="15 de agosto">15 de agosto</option>
+                        <option value="Las palmeras">Las palmeras</option>
+                        <option value="Barrio Morán">Barrio Morán</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                    <input type="text" id="otroBarrioInputRef3" name="otroBarrioRef3" style="display: none;" placeholder="Ingrese el nombre del barrio">
                 </div>
                 <div class="form-group">
                     <label for="relacion_ref3">Relación:</label>
@@ -253,114 +376,83 @@
                 </select>
             </div>
             <div id="garanteSection" class="section garante" style="display: none;">
-              <h2>Datos del Garante</h2>
-              <div class="form-group">
-                  <label for="nombre_garante">Nombre Completo:</label>
-                  <input type="text" id="nombre_garante" name="nombre_garante">
-              </div>
-           <div class="form-group">
-            <label for="foto_cedula_frente_garante">Foto Cédula (Frente):</label>
-            <button type="button"  class ="Capturar" data-target="GaranteFrente" id="takePhotoGaranteFrente">Activar Camara</button>
-              <video id="videoGaranteFrente" width="80" height="50" style="display:none;" autoplay muted playsinline></video>
-               <button type="button" class ="TomarFotos" data-target="GaranteFrente" id="TomarFotos_GarantesFrente"  style="display:none;"  >Tomar Foto</button>
-
-            <canvas id="canvasGaranteFrente" width="80" height="50" style="display:none;"></canvas>
-            <img id="photoGaranteFrente" alt="Foto Cédula (Frente)" style="max-width: 100%; height: auto;">
-            <input type="hidden" id="fotoBase64GaranteFrente" name="fotoBase64GaranteFrente">
-              <div class="form-group">
-         <div class="form-group">
-            <label for="foto_cedula_dorso_garante">Foto Cédula (Dorso):</label>
-            <button type="button"  class ="Capturar" data-target="GaranteDorso" id="takePhotoGaranteDorso">Activar Camara</button>
-             <button type="button" class ="TomarFotos" data-target="GaranteDorso" id="TomarFotos_GaranteDorso"  style="display:none;"  >Tomar Foto</button>
-             
-            <video id="videoGaranteDorso" width="80" height="50" style="display:none;" autoplay muted playsinline></video>
-            <canvas id="canvasGaranteDorso" width="80" height="50" style="display:none;"></canvas>
-            <img id="photoGaranteDorso" alt="Foto Cédula (Dorso)" style="max-width: 100%; height: auto;">
-            <input type="hidden" id="fotoBase64GaranteDorso" name="fotoBase64GaranteDorso">
-        </div>
-              <div class="form-group">
-                  <label for="cedula_garante">Cédula:</label>
-                  <input type="text" id="cedula_garante" name="cedula_garante">
-              </div>
-              <div class="form-group">
-                  <label for="telefono_garante">Teléfono:</label>
-                  <input type="tel" id="telefono_garante" name="telefono_garante" oninput="formatearTelefono(this)">
-              </div>
-              <div class="form-group">
-                  <label for="direccion_garante">Dirección:</label>
-                  <input type="text" id="direccion_garante" name="direccion_garante">
-              </div>
-              <div class="form-group">
-                  <label for="lugar_trabajo_garante">Lugar de Trabajo:</label>
-                  <input type="text" id="lugar_trabajo_garante" name="lugar_trabajo_garante">
-              </div>
-              <div class="form-group">
-                  <label for="ingreso_mensual_garante">Ingreso Mensual:</label>
-                  <input type="text" id="ingreso_mensual_garante" name="ingreso_mensual_garante" oninput="formatearNumero(this)">
-              </div>
+                <h2>Datos del Garante</h2>
+                <div class="form-group">
+                    <label for="nombre_garante">Nombre Completo:</label>
+                    <input type="text" id="nombre_garante" name="nombre_garante">
                 </div>
                 <div class="form-group">
-                    <label for="observaciones">Observaciones Generales:</label>
-                    <textarea id="observaciones" name="observaciones" rows="4"></textarea>
+                    <label for="direccion_garante">Dirección:</label>
+                    <input type="text" id="direccion_garante" name="direccion_garante">
                 </div>
-            </section>
+                <div class="form-group">
+                    <label for="barrio_garante">Barrio:</label>
+                    <select id="barrio_garante" name="barrio_garante" onchange="toggleOtroBarrio('garante')">
+                        <option value="">Seleccione un barrio</option>
+                        <option value="Jardín del Norte">Jardín del Norte</option>
+                        <option value="Renacer">Renacer</option>
+                        <option value="Nuevo Horizonte">Nuevo Horizonte</option>
+                        <option value="San José">San José</option>
+                        <option value="María Auxiliadora">María Auxiliadora</option>
+                        <option value="Karen Luana">Karen Luana</option>
+                        <option value="Santa Teresa">Santa Teresa</option>
+                        <option value="Adela Speratti">Adela Speratti</option>
+                        <option value="San Blas">San Blas</option>
+                        <option value="Villa Florida">Villa Florida</option>
+                        <option value="Stella Marys">Stella Marys</option>
+                        <option value="Donde Nace El Sol">Donde Nace El Sol</option>
+                        <option value="Santa Rosa">Santa Rosa</option>
+                        <option value="San Miguel">San Miguel</option>
+                        <option value="Primavera">Primavera</option>
+                        <option value="Residencial Acuario">Residencial Acuario</option>
+                        <option value="Rayito de Sol Kilómetro 2">Rayito de Sol Kilómetro 2</option>
+                        <option value="San Francisco">San Francisco</option>
+                        <option value="San Jorge">San Jorge</San Jorge</option>
+                        <option value="Ko'e Rory">Ko'e Rory</option>
+                        <option value="San Juan">San Juan</option>
+                        <option value="8 de diciembre">8 de diciembre</option>
+                        <option value="Cafetal guaraní">Cafetal guaraní</option>
+                        <option value="15 de agosto">15 de agosto</option>
+                        <option value="Las palmeras">Las palmeras</option>
+                        <option value="Barrio Morán">Barrio Morán</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                    <input type="text" id="otroBarrioInputGarante" name="otroBarrioGarante" style="display: none;" placeholder="Ingrese el nombre del barrio">
+                </div>
+                <div class="form-group">
+                    <label for="cedula_garante">Cédula:</label>
+                    <input type="text" id="cedula_garante" name="cedula_garante">
+                </div>
+                <div class="form-group">
+                    <label for="telefono_garante">Teléfono:</label>
+                    <input type="tel" id="telefono_garante" name="telefono_garante" oninput="formatearTelefono(this)">
+                </div>
+                <div class="form-group">
+                    <label for="lugar_trabajo_garante">Lugar de Trabajo:</label>
+                    <input type="text" id="lugar_trabajo_garante" name="lugar_trabajo_garante">
+                </div>
+                <div class="form-group">
+                    <label for="ingreso_mensual_garante">Ingreso Mensual:</label>
+                    <input type="text" id="ingreso_mensual_garante" name="ingreso_mensual_garante" oninput="formatearNumero(this)">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="observaciones">Observaciones Generales:</label>
+                <textarea id="observaciones" name="observaciones" rows="4"></textarea>
+            </div>
+        </section>
 
-            <section > <h2>Junior Enciso - Asesor</h2>
-        
+        <section>
+            <h2>Junior Enciso - Asesor</h2>
+        </section>
 
-        
-
-    
-
-    
-
-         
-
-            
-               
-
-
-       
-
-
-    
-        
-    </section>
         <div class="button-container">
-            
-                
+            <button type="button" id="generarPdf">Guardar como PDF</button>
+        </div>
 
-                 <input  style="display:none;"   type="text" id="texto_informe" value= " Junior Enciso Asesor Telefono : 0985 933847 Direccion : Adela Espeatti"  />
-                
-                <button type="button" id="generarPdf">Guardar como PDF</button>
-             
-
-           
-
-           
-    
-
-  
-
-  
-
-
-    
-    
-  
-
- 
-
-  
-   
-
-
-
-    
-
- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
-<script src="script.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+        <script src="script.js"></script>
+    </div>
 </body>
 </html>
     
